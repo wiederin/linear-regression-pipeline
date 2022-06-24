@@ -38,7 +38,7 @@ def clean_csv(path):
                 line += 1
 
 
-def data_parser():
+def data_loader():
     print("--------- load file ---------")
     # find files
     print("files in data directory: ")
