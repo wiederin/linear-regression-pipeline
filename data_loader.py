@@ -53,11 +53,9 @@ def data_loader():
     return df
 
 
-'''
-# function to test parser
-def __main():
-    data_parser()
+def main():
+    data_loader()
 
-# run to test parser
-main()
-'''
+
+if __name__ == "__main__":
+    main()
