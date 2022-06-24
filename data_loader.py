@@ -39,7 +39,7 @@ def clean_csv(path):
 
 
 def data_loader():
-    print("--------- load file ---------")
+    print("--------------------------------- load file ---------------------------------")
     # find files
     print("files in data directory: ")
     files = find_files()
@@ -48,6 +48,8 @@ def data_loader():
     selection = int(input())
     # parse csv
     df = pd.read_csv(files[selection])
+    print("------------------------------------ data ------------------------------------")
+    print(df)
     return df
 
 
