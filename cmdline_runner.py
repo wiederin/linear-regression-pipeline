@@ -6,15 +6,16 @@ import trainer as trn
 def main():
     df = dp.data_loader()
     while True:
-        print("---------- options ----------")
+        print("---------------------------------- options -----------------------------------")
         print("0 plot")
         print("1 train")
         print("x exit")
         selection = input()
         if selection is '0':
-            print("---------- plotter ----------")
+            print("---------------------------------- plotter -----------------------------------")
             plt.plotter(df)
         elif selection is '1':
+            print("---------------------------------- trainer -----------------------------------")
             trn.trainer(df)
         elif selection is 'x':
             break
