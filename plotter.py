@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import data_loader as dp
 
 
 def plot(variables, df):
@@ -8,13 +9,12 @@ def plot(variables, df):
 
 def plotter(df):
     columns = list(df.columns)
-    df_binary = df[columns]
     index = 0
-    print("--------- Variables ---------")
+    print("--------- variables ---------")
     for column in columns:
         print(index, column)
         index += 1
-    print("select variables (0,1 - x,y")
+    print("select variables (0,1 - x,y)")
     variablesString = input()
     variablesIndices = variablesString.split(',')
     variables = []
@@ -22,3 +22,12 @@ def plotter(df):
         if int(index) < len(columns):
             variables.append(columns[int(index)])
     plot(variables, df)
+
+
+def main():
+    df = dp.data_loader()
+    plotter(df)
+
+
+if __name__ == "__main__":
+    main()
