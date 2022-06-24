@@ -1,4 +1,6 @@
 import os
+import csv
+import pandas as pd
 
 
 def find_files():
@@ -26,6 +28,16 @@ def find_files():
     return files
 
 
+def clean_csv(path):
+    with open(path) as file:
+        csv_reader = csv.reader(file, delimiter=',')
+        line = 0
+        for row in csv_reader:
+            if line == 0:
+                print(row)
+                line += 1
+
+
 def data_parser():
     # find files
     print("files in data directory: ")
@@ -33,12 +45,16 @@ def data_parser():
     # select file
     print("select file: ")
     selection = int(input())
-    print(files[selection])
+    # parse csv
+    df = pd.read_csv(files[selection])
+    return df
 
+
+'''
 # function to test parser
-def main():
+def __main():
     data_parser()
-
 
 # run to test parser
 main()
+'''
