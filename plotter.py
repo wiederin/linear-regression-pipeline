@@ -10,7 +10,7 @@ def plot(variables, df):
 def plotter(df):
     columns = list(df.columns)
     index = 0
-    print("--------- variables ---------")
+    print("--------------------------------- variables ----------------------------------")
     for column in columns:
         print(index, column)
         index += 1
@@ -21,6 +21,9 @@ def plotter(df):
     for index in variablesIndices:
         if int(index) < len(columns):
             variables.append(columns[int(index)])
+    if len(variables) < 2:
+        print("error only one variable selected")
+        return
     plot(variables, df)
 
 
