@@ -41,19 +41,24 @@ def plot_regression_line(xName, yName, x, y, b):
 
 
 def simple_linear_regression(xName, yName, x, y):
+    print("-------------------------- simple linear regression --------------------------")
     b = estimate_coef(x, y)
     print("estimated coefficients: \nb_0 = {} \nb_1 = {}".format(b[0], b[1]))
     plot_regression_line(xName, yName, x, y, b)
 
 
+#def multiple_linear_regression(var_names):
+
+
+
 def trainer(df):
     columns = list(df.columns)
     index = 0
-    print("--------- variables ---------")
+    print("--------------------------------- variables ----------------------------------")
     for column in columns:
         print(index, column)
         index += 1
-    print("select variables (0,1 - x,y)")
+    print("select variables (0,1 - x,y or 0,1,2 x1, x2, y)")
     variablesString = input()
     variablesIndices = variablesString.split(',')
     variables = []
@@ -61,9 +66,13 @@ def trainer(df):
         if int(index) < len(columns):
             variables.append(columns[int(index)])
     # simple linear regression
-    if len(variables) == 2:
+    if len(variables) < 2:
+        print("error only one variable selected")
+    elif len(variables) == 2:
         simple_linear_regression(variables[0], variables[1], df[variables[0]], df[variables[1]])
-
+    else:
+        #multiple_linear_regression(variables)
+        print(df)
 
 def main():
     df = dp.data_loader()
