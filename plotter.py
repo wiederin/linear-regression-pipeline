@@ -10,7 +10,7 @@ def plotter(df):
     columns = list(df.columns)
     df_binary = df[columns]
     index = 0
-    print("----- Variables -----")
+    print("------- Variables -------")
     for column in columns:
         print(index, column)
         index += 1
