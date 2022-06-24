@@ -39,6 +39,7 @@ def clean_csv(path):
 
 
 def data_parser():
+    print("--------- load file ---------")
     # find files
     print("files in data directory: ")
     files = find_files()

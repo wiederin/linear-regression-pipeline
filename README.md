@@ -1,5 +1,6 @@
 # linear_regression_pipeline
 
-## data_parser
+## linear regression
+
 
 * parse csv files in data directory
