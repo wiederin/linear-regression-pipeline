@@ -38,8 +38,8 @@ def clean_csv(path):
                 line += 1
 
 
-def data_parser():
-    print("--------- load file ---------")
+def data_loader():
+    print("--------------------------------- load file ---------------------------------")
     # find files
     print("files in data directory: ")
     files = find_files()
@@ -48,14 +48,14 @@ def data_parser():
     selection = int(input())
     # parse csv
     df = pd.read_csv(files[selection])
+    print("------------------------------------ data ------------------------------------")
+    print(df)
     return df
 
 
-'''
-# function to test parser
-def __main():
-    data_parser()
+def main():
+    data_loader()
 
-# run to test parser
-main()
-'''
+
+if __name__ == "__main__":
+    main()
