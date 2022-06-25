@@ -3,9 +3,7 @@
 this application:
 
 * parses csv files in data directory
-
 * plots data
-
 * creates & plots simple/multiple linear regressions
 
 ## plotter
@@ -17,6 +15,16 @@ this application:
 ### multiple linear regression
 
 ## cmdline_runner
+
+## libraries used
+
+* PyQt6
+* sklearn
+* numpy
+* matplotlib
+* csv
+* pandas
+* os
 
 
 
