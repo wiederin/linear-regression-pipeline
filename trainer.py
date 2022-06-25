@@ -1,6 +1,8 @@
 import data_loader as dp
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn import datasets, linear_model, metrics
 
 
 def estimate_coef(x, y):
@@ -47,8 +49,52 @@ def simple_linear_regression(xName, yName, x, y):
     plot_regression_line(xName, yName, x, y, b)
 
 
-#def multiple_linear_regression(var_names):
+def multiple_linear_regression(var_names, df):
+    print("------------------------- multiple linear regression -------------------------")
+    print("enter test size: ")
+    test_size = int(input())
+    # create x matrix from df
+    x = df[var_names[0:len(var_names)-1]]
+    # create y matrix from df
+    y = df[var_names[len(var_names)-1:len(var_names)]]
 
+    # splitting x and y into training and testing sets
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=1)
+
+    # create linear regression object
+    reg = linear_model.LinearRegression()
+
+    # train the model using the training sets
+    reg.fit(x_train, y_train)
+
+    # regression coefficients
+    print('coefficients: ', reg.coef_)
+
+    # variance score: 1 means perfect prediction
+    print('variance score: {}'.format(reg.score(x_test, y_test)))
+
+    # plot for residual error
+
+    # setting plot style
+    plt.style.use('fivethirtyeight')
+
+    # plotting residual errors in training data
+    plt.scatter(reg.predict(x_train), reg.predict(x_train) - y_train, color="green", s=10, label='train data')
+
+    # plotting residual errors in test data
+    plt.scatter(reg.predict(x_test), reg.predict(x_test) - y_test, color="blue", s=10, label='test data')
+
+    # plotting line for zero residual error
+    plt.hlines(y=0, xmin=0, xmax=50, linewidth=2)
+
+    # plot legend
+    plt.legend(loc = 'upper right')
+
+    # plot title
+    plt.title('residual errors')
+
+    # show plot
+    plt.show()
 
 
 def trainer(df):
@@ -71,8 +117,10 @@ def trainer(df):
     elif len(variables) == 2:
         simple_linear_regression(variables[0], variables[1], df[variables[0]], df[variables[1]])
     else:
-        #multiple_linear_regression(variables)
-        print(df)
+        multiple_linear_regression(variables, df)
+    print("------------------------------------------------------------------------------")
+    print("//////////////////////////////////////////////////////////////////////////////")
+
 
 def main():
     df = dp.data_loader()
