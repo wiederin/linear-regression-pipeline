@@ -16,6 +16,12 @@ this application:
 
 ## cmdline_runner
 
+## controlboard
+
+### gui
+
+to generate new code from .ui file command:`python3 -m PyQt6.uic.pyuic controlboard.ui -o controlboard-gui-update.py`
+
 ## libraries used
 
 * PyQt6
