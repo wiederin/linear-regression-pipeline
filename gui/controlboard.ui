@@ -103,7 +103,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>load available files</string>
+             <string>reload available files</string>
             </property>
            </widget>
           </item>

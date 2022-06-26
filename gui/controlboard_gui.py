@@ -167,15 +167,19 @@ class Ui_mainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         mainWindow.setWindowTitle(_translate("mainWindow", "controlboard"))
         self.data_module_label.setText(_translate("mainWindow", "data loader"))
-        self.lfs_button.setText(_translate("mainWindow", "load available files"))
+        self.lfs_button.setText(_translate("mainWindow", "reload available files"))
         self.lf_button.setText(_translate("mainWindow", "load file"))
         self.plotter_label.setText(_translate("mainWindow", "plotter"))
         self.trainer_label.setText(_translate("mainWindow", "trainer"))
         self.toolBar.setWindowTitle(_translate("mainWindow", "toolBar"))
 
     def lfs_button_called(self):
+        self.file_list_view.clear()
+        self.file_list_view.setHorizontalHeaderLabels(["file"])
         files = data_loader.find_files()
-
+        for i, file in enumerate(files):
+            item = QTableWidgetItem(file)
+            self.file_list_view.setItem(i, 0, item)
 
 
 import sys
