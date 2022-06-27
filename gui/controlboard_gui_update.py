@@ -7,16 +7,10 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-import data_loader
-import pandas as pd
 
 
 class Ui_mainWindow(object):
     def setupUi(self, mainWindow):
-        # i added
-        files = data_loader.find_files()
-
-        # start generated code from updates
         mainWindow.setObjectName("mainWindow")
         mainWindow.resize(1404, 746)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Maximum)
@@ -151,21 +145,6 @@ class Ui_mainWindow(object):
         self.toolBar.setObjectName("toolBar")
         mainWindow.addToolBar(QtCore.Qt.ToolBarArea.TopToolBarArea, self.toolBar)
 
-        # end of generated code from updates
-
-        # i added
-        self.lfs_button.clicked.connect(self.lfs_button_called)
-        self.lf_button.clicked.connect(self.lf_button_called)
-
-        self.file_list_view.setHorizontalHeaderLabels(["file"])
-        self.file_list_view.setColumnCount(1)
-        self.file_list_view.setRowCount(len(files))
-        self.file_list_view.setColumnWidth(0, 300)
-        for i, file in enumerate(files):
-            item = QTableWidgetItem(file)
-            self.file_list_view.setItem(i, 0, item)
-        # end
-
         self.retranslateUi(mainWindow)
         QtCore.QMetaObject.connectSlotsByName(mainWindow)
 
@@ -175,43 +154,8 @@ class Ui_mainWindow(object):
         self.data_module_label.setText(_translate("mainWindow", "data loader"))
         self.lfs_button.setText(_translate("mainWindow", "reload available files"))
         self.lf_button.setText(_translate("mainWindow", "load file"))
+        item = self.file_list_view.horizontalHeaderItem(0)
+        item.setText(_translate("mainWindow", "file"))
         self.plotter_label.setText(_translate("mainWindow", "plotter"))
         self.trainer_label.setText(_translate("mainWindow", "trainer"))
         self.toolBar.setWindowTitle(_translate("mainWindow", "toolBar"))
-
-
-    def lfs_button_called(self):
-        self.file_list_view.clear()
-        self.file_list_view.setHorizontalHeaderLabels(["file"])
-        files = data_loader.find_files()
-        for i, file in enumerate(files):
-            item = QTableWidgetItem(file)
-            self.file_list_view.setItem(i, 0, item)
-
-    def lf_button_called(self):
-        _translate = QtCore.QCoreApplication.translate
-        path = self.file_list_view.selectedItems()[0].data(0)
-        # parse csv
-        df = pd.read_csv(path)
-        self.data_overview.clear()
-        self.data_overview.insertPlainText(str(df))
-        self.dataframe = df
-
-
-
-import sys
-from PyQt6.QtWidgets import *
-
-
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super(MainWindow, self).__init__()
-        self.ui = Ui_mainWindow()
-        self.ui.setupUi(self)
-
-
-if __name__ == '__main__':
-    app = QApplication([])
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
