@@ -195,6 +195,8 @@ class Ui_mainWindow(object):
         df = pd.read_csv(path)
         self.data_overview.clear()
         self.data_overview.insertPlainText(str(df))
+        self.dataframe = df
+
 
 
 import sys
