@@ -23,7 +23,7 @@ this application:
 to import updated generated code from the .ui file into the controlboard_gui.py file run update.py (this generates new
 code from the .ui file and then copies it into the gui file at the right place.
 
-to generate new code from .ui file command:`python3 -m PyQt6.uic.pyuic controlboard.ui -o controlboard-gui-update.py`
+to generate new code from .ui file command:`python3 -m PyQt6.uic.pyuic controlboard.ui -o controlboard_gui_update.py`
 
 ## libraries used
 
