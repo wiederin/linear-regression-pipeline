@@ -152,7 +152,7 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>130</width>
+               <width>300</width>
                <height>100</height>
               </size>
              </property>
@@ -177,25 +177,55 @@
           <property name="maximumSize">
            <size>
             <width>540</width>
-            <height>300</height>
+            <height>259</height>
            </size>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QTextBrowser" name="textBrowser_2">
+         <widget class="QFrame" name="verticalFrame_2">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
           <property name="maximumSize">
            <size>
-            <width>300</width>
-            <height>120</height>
+            <width>200</width>
+            <height>16777215</height>
            </size>
           </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QTableWidget" name="variable_list_view">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <column>
+              <property name="text">
+               <string>variable</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="plot">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>plot</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
@@ -221,13 +251,19 @@
     </property>
     <layout class="QHBoxLayout" name="plotter_module">
      <item>
-      <widget class="QLabel" name="plotter_label">
-       <property name="text">
-        <string>plotter</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignHCenter|Qt::AlignTop</set>
-       </property>
+      <widget class="QFrame" name="verticalFrame_2">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="plotter_label">
+          <property name="text">
+           <string>plot</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignHCenter|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
     </layout>
