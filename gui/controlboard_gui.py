@@ -34,7 +34,7 @@ class Ui_mainWindow(object):
         self.centralwidget = QtWidgets.QWidget(mainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 1401, 336))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 1401, 337))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.data_module = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.data_module.setContentsMargins(0, 0, 0, 0)
@@ -59,24 +59,22 @@ class Ui_mainWindow(object):
         self.d_l_frame.setObjectName("d_l_frame")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.d_l_frame)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        spacerItem = QtWidgets.QSpacerItem(30, 10, QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem)
         self.fl_vf = QtWidgets.QFrame(self.d_l_frame)
         self.fl_vf.setMaximumSize(QtCore.QSize(340, 16777215))
         self.fl_vf.setObjectName("fl_vf")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.fl_vf)
         self.verticalLayout.setObjectName("verticalLayout")
         self.lfs_button = QtWidgets.QPushButton(self.fl_vf)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lfs_button.sizePolicy().hasHeightForWidth())
         self.lfs_button.setSizePolicy(sizePolicy)
         self.lfs_button.setObjectName("lfs_button")
-        self.verticalLayout.addWidget(self.lfs_button, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
+        self.verticalLayout.addWidget(self.lfs_button)
         self.lf_button = QtWidgets.QPushButton(self.fl_vf)
         self.lf_button.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lf_button.sizePolicy().hasHeightForWidth())
@@ -188,20 +186,25 @@ class Ui_mainWindow(object):
         self.trainer_module = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
         self.trainer_module.setContentsMargins(0, 0, 0, 0)
         self.trainer_module.setObjectName("trainer_module")
-        self.line_2 = QtWidgets.QFrame(self.horizontalLayoutWidget_2)
-        self.line_2.setFrameShape(QtWidgets.QFrame.Shape.VLine)
-        self.line_2.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_2.setObjectName("line_2")
-        self.trainer_module.addWidget(self.line_2)
         self.tr_vf = QtWidgets.QFrame(self.horizontalLayoutWidget_2)
         self.tr_vf.setObjectName("tr_vf")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.tr_vf)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.trainer_label = QtWidgets.QLabel(self.tr_vf)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.trainer_label.sizePolicy().hasHeightForWidth())
+        self.trainer_label.setSizePolicy(sizePolicy)
         self.trainer_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignTop)
         self.trainer_label.setObjectName("trainer_label")
         self.verticalLayout_4.addWidget(self.trainer_label)
         self.trainer_module.addWidget(self.tr_vf)
+        self.line_2 = QtWidgets.QFrame(self.centralwidget)
+        self.line_2.setGeometry(QtCore.QRect(580, 340, 20, 411))
+        self.line_2.setFrameShape(QtWidgets.QFrame.Shape.VLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_2.setObjectName("line_2")
         mainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(mainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -299,23 +302,24 @@ class Ui_mainWindow(object):
     def plot_button_called(self):
         # clear the canvas
         self.figure.clear()
-        x = ""
-        y = ""
+        x = []
+        y = []
         # get variables from variable_list_view
         for row in range(self.variable_list_view.rowCount()):
             # x is selected
             if self.variable_list_view.item(row, 1).checkState() == Qt.CheckState.Checked:
                 print(self.variable_list_view.item(row, 0).data(0))
-                x = self.variable_list_view.item(row, 0).data(0)
+                x.append(self.variable_list_view.item(row, 0).data(0))
 
             # y is selected
             if self.variable_list_view.item(row, 2).checkState() == Qt.CheckState.Checked:
                 print(self.variable_list_view.item(row, 0).data(0))
-                y = self.variable_list_view.item(row, 0).data(0)
+                y.append(self.variable_list_view.item(row, 0).data(0))
 
         # variables = list(self.dataframe.columns)
-        plt.plot(self.dataframe[x], self.dataframe[y], 'bo')
-
+        plt.plot(self.dataframe[x[0]], self.dataframe[y[0]], 'ro')
+        plt.xlabel(x[0])
+        plt.ylabel(y[0])
         # refresh canvas
         self.canvas.draw()
 
