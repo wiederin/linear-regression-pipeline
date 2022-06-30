@@ -12,6 +12,7 @@ import pandas as pd
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
+from PyQt6.QtCore import Qt
 
 
 
@@ -224,8 +225,10 @@ class Ui_mainWindow(object):
             item = QTableWidgetItem(file)
             self.file_list_view.setItem(i, 0, item)
 
-        # set width of variable list column
-        self.variable_list_view.setColumnWidth(0, 143)
+        # set width of variable list columns
+        self.variable_list_view.setColumnWidth(0, 83)
+        self.variable_list_view.setColumnWidth(1, 30)
+        self.variable_list_view.setColumnWidth(2, 30)
 
         # canvas
         self.figure = plt.figure()
@@ -283,23 +286,38 @@ class Ui_mainWindow(object):
         self.variable_list_view.setRowCount(len(variables))
         for i, variable in enumerate(variables):
             item = QTableWidgetItem(variable)
+            checkboxx = QTableWidgetItem()
+            checkboxx.setFlags(Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsEnabled)
+            checkboxx.setCheckState(Qt.CheckState.Unchecked)
+            checkboxy = QTableWidgetItem()
+            checkboxy.setFlags(Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsEnabled)
+            checkboxy.setCheckState(Qt.CheckState.Unchecked)
             self.variable_list_view.setItem(i, 0, item)
+            self.variable_list_view.setItem(i, 1, checkboxx)
+            self.variable_list_view.setItem(i, 2, checkboxy)
 
     def plot_button_called(self):
         # clear the canvas
         self.figure.clear()
-        variables = list(self.dataframe.columns)
-        plt.plot(self.dataframe[variables[3]], self.dataframe[variables[4]], 'bo')
+        x = ""
+        y = ""
+        # get variables from variable_list_view
+        for row in range(self.variable_list_view.rowCount()):
+            # x is selected
+            if self.variable_list_view.item(row, 1).checkState() == Qt.CheckState.Checked:
+                print(self.variable_list_view.item(row, 0).data(0))
+                x = self.variable_list_view.item(row, 0).data(0)
+
+            # y is selected
+            if self.variable_list_view.item(row, 2).checkState() == Qt.CheckState.Checked:
+                print(self.variable_list_view.item(row, 0).data(0))
+                y = self.variable_list_view.item(row, 0).data(0)
+
+        # variables = list(self.dataframe.columns)
+        plt.plot(self.dataframe[x], self.dataframe[y], 'bo')
 
         # refresh canvas
         self.canvas.draw()
-
-
-
-
-
-
-
 
 import sys
 from PyQt6.QtWidgets import *
