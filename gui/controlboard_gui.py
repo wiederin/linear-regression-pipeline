@@ -9,6 +9,11 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 import data_loader
 import pandas as pd
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
+from PyQt6.QtCore import Qt
+
 
 
 class Ui_mainWindow(object):
@@ -18,7 +23,7 @@ class Ui_mainWindow(object):
 
         # start generated code from updates
         mainWindow.setObjectName("mainWindow")
-        mainWindow.resize(1404, 746)
+        mainWindow.resize(1404, 776)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -29,7 +34,7 @@ class Ui_mainWindow(object):
         self.centralwidget = QtWidgets.QWidget(mainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 1401, 301))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 1401, 337))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.data_module = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.data_module.setContentsMargins(0, 0, 0, 0)
@@ -54,24 +59,22 @@ class Ui_mainWindow(object):
         self.d_l_frame.setObjectName("d_l_frame")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.d_l_frame)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        spacerItem = QtWidgets.QSpacerItem(30, 10, QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem)
-        self.verticalFrame_2 = QtWidgets.QFrame(self.d_l_frame)
-        self.verticalFrame_2.setMaximumSize(QtCore.QSize(340, 16777215))
-        self.verticalFrame_2.setObjectName("verticalFrame_2")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalFrame_2)
+        self.fl_vf = QtWidgets.QFrame(self.d_l_frame)
+        self.fl_vf.setMaximumSize(QtCore.QSize(340, 16777215))
+        self.fl_vf.setObjectName("fl_vf")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.fl_vf)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.lfs_button = QtWidgets.QPushButton(self.verticalFrame_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Maximum)
+        self.lfs_button = QtWidgets.QPushButton(self.fl_vf)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lfs_button.sizePolicy().hasHeightForWidth())
         self.lfs_button.setSizePolicy(sizePolicy)
         self.lfs_button.setObjectName("lfs_button")
-        self.verticalLayout.addWidget(self.lfs_button, 0, QtCore.Qt.AlignmentFlag.AlignLeft)
-        self.lf_button = QtWidgets.QPushButton(self.verticalFrame_2)
+        self.verticalLayout.addWidget(self.lfs_button)
+        self.lf_button = QtWidgets.QPushButton(self.fl_vf)
         self.lf_button.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lf_button.sizePolicy().hasHeightForWidth())
@@ -79,39 +82,68 @@ class Ui_mainWindow(object):
         self.lf_button.setMaximumSize(QtCore.QSize(150, 16777215))
         self.lf_button.setObjectName("lf_button")
         self.verticalLayout.addWidget(self.lf_button)
-        self.file_list_view = QtWidgets.QTableWidget(self.verticalFrame_2)
+        self.file_list_view = QtWidgets.QTableWidget(self.fl_vf)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Ignored)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.file_list_view.sizePolicy().hasHeightForWidth())
         self.file_list_view.setSizePolicy(sizePolicy)
         self.file_list_view.setMinimumSize(QtCore.QSize(300, 160))
-        self.file_list_view.setMaximumSize(QtCore.QSize(130, 100))
+        self.file_list_view.setMaximumSize(QtCore.QSize(300, 100))
         self.file_list_view.setObjectName("file_list_view")
         self.file_list_view.setColumnCount(1)
         self.file_list_view.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.file_list_view.setHorizontalHeaderItem(0, item)
         self.verticalLayout.addWidget(self.file_list_view)
-        self.horizontalLayout_3.addWidget(self.verticalFrame_2)
+        self.horizontalLayout_3.addWidget(self.fl_vf)
         self.data_overview = QtWidgets.QPlainTextEdit(self.d_l_frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.data_overview.sizePolicy().hasHeightForWidth())
         self.data_overview.setSizePolicy(sizePolicy)
-        self.data_overview.setMaximumSize(QtCore.QSize(540, 300))
+        self.data_overview.setMaximumSize(QtCore.QSize(540, 259))
         self.data_overview.setObjectName("data_overview")
         self.horizontalLayout_3.addWidget(self.data_overview)
-        self.textBrowser_2 = QtWidgets.QTextBrowser(self.d_l_frame)
+        self.v_b_vf = QtWidgets.QFrame(self.d_l_frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.v_b_vf.sizePolicy().hasHeightForWidth())
+        self.v_b_vf.setSizePolicy(sizePolicy)
+        self.v_b_vf.setMaximumSize(QtCore.QSize(200, 16777215))
+        self.v_b_vf.setObjectName("v_b_vf")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.v_b_vf)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.variable_list_view = QtWidgets.QTableWidget(self.v_b_vf)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.textBrowser_2.sizePolicy().hasHeightForWidth())
-        self.textBrowser_2.setSizePolicy(sizePolicy)
-        self.textBrowser_2.setMaximumSize(QtCore.QSize(300, 120))
-        self.textBrowser_2.setObjectName("textBrowser_2")
-        self.horizontalLayout_3.addWidget(self.textBrowser_2)
+        sizePolicy.setHeightForWidth(self.variable_list_view.sizePolicy().hasHeightForWidth())
+        self.variable_list_view.setSizePolicy(sizePolicy)
+        self.variable_list_view.setObjectName("variable_list_view")
+        self.variable_list_view.setColumnCount(3)
+        self.variable_list_view.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.variable_list_view.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.variable_list_view.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.variable_list_view.setHorizontalHeaderItem(2, item)
+        self.verticalLayout_3.addWidget(self.variable_list_view)
+        self.plot_button = QtWidgets.QPushButton(self.v_b_vf)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.plot_button.sizePolicy().hasHeightForWidth())
+        self.plot_button.setSizePolicy(sizePolicy)
+        self.plot_button.setObjectName("plot_button")
+        self.verticalLayout_3.addWidget(self.plot_button)
+        self.train_button = QtWidgets.QPushButton(self.v_b_vf)
+        self.train_button.setObjectName("train_button")
+        self.verticalLayout_3.addWidget(self.train_button)
+        self.horizontalLayout_3.addWidget(self.v_b_vf)
         self.data_module.addWidget(self.d_l_frame)
         self.line = QtWidgets.QFrame(self.verticalLayoutWidget)
         self.line.setFrameShape(QtWidgets.QFrame.Shape.HLine)
@@ -119,30 +151,60 @@ class Ui_mainWindow(object):
         self.line.setObjectName("line")
         self.data_module.addWidget(self.line)
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(0, 300, 591, 411))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(0, 330, 591, 411))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.plotter_module = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.plotter_module.setContentsMargins(0, 0, 0, 0)
         self.plotter_module.setObjectName("plotter_module")
-        self.plotter_label = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.pl_vf = QtWidgets.QFrame(self.horizontalLayoutWidget)
+        self.pl_vf.setObjectName("pl_vf")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.pl_vf)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.plotter_label = QtWidgets.QLabel(self.pl_vf)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.plotter_label.sizePolicy().hasHeightForWidth())
+        self.plotter_label.setSizePolicy(sizePolicy)
+        self.plotter_label.setMaximumSize(QtCore.QSize(16777215, 20))
         self.plotter_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignTop)
         self.plotter_label.setObjectName("plotter_label")
-        self.plotter_module.addWidget(self.plotter_label)
+        self.verticalLayout_2.addWidget(self.plotter_label)
+        self.plot_frame = QtWidgets.QFrame(self.pl_vf)
+        self.plot_frame.setObjectName("plot_frame")
+        self.horizontalLayoutWidget_3 = QtWidgets.QWidget(self.plot_frame)
+        self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(9, -1, 571, 371))
+        self.horizontalLayoutWidget_3.setObjectName("horizontalLayoutWidget_3")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_3)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.verticalLayout_2.addWidget(self.plot_frame)
+        self.plotter_module.addWidget(self.pl_vf)
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(590, 300, 811, 411))
+        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(600, 330, 811, 411))
         self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
         self.trainer_module = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
         self.trainer_module.setContentsMargins(0, 0, 0, 0)
         self.trainer_module.setObjectName("trainer_module")
-        self.line_2 = QtWidgets.QFrame(self.horizontalLayoutWidget_2)
+        self.tr_vf = QtWidgets.QFrame(self.horizontalLayoutWidget_2)
+        self.tr_vf.setObjectName("tr_vf")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.tr_vf)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.trainer_label = QtWidgets.QLabel(self.tr_vf)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.trainer_label.sizePolicy().hasHeightForWidth())
+        self.trainer_label.setSizePolicy(sizePolicy)
+        self.trainer_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignTop)
+        self.trainer_label.setObjectName("trainer_label")
+        self.verticalLayout_4.addWidget(self.trainer_label)
+        self.trainer_module.addWidget(self.tr_vf)
+        self.line_2 = QtWidgets.QFrame(self.centralwidget)
+        self.line_2.setGeometry(QtCore.QRect(580, 340, 20, 411))
         self.line_2.setFrameShape(QtWidgets.QFrame.Shape.VLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_2.setObjectName("line_2")
-        self.trainer_module.addWidget(self.line_2)
-        self.trainer_label = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
-        self.trainer_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignTop)
-        self.trainer_label.setObjectName("trainer_label")
-        self.trainer_module.addWidget(self.trainer_label)
         mainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(mainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -154,31 +216,58 @@ class Ui_mainWindow(object):
         # end of generated code from updates
 
         # i added
+        # connect buttons
         self.lfs_button.clicked.connect(self.lfs_button_called)
         self.lf_button.clicked.connect(self.lf_button_called)
+        self.plot_button.clicked.connect(self.plot_button_called)
 
-        self.file_list_view.setHorizontalHeaderLabels(["file"])
-        self.file_list_view.setColumnCount(1)
+        # fill file list
         self.file_list_view.setRowCount(len(files))
         self.file_list_view.setColumnWidth(0, 300)
         for i, file in enumerate(files):
             item = QTableWidgetItem(file)
             self.file_list_view.setItem(i, 0, item)
+
+        # set width of variable list columns
+        self.variable_list_view.setColumnWidth(0, 83)
+        self.variable_list_view.setColumnWidth(1, 30)
+        self.variable_list_view.setColumnWidth(2, 30)
+
+        # canvas
+        self.figure = plt.figure()
+        self.canvas = FigureCanvas(self.figure)
+        # add canvas
+        self.horizontalLayout.addWidget(self.canvas)
+
+
+
+
         # end
 
         self.retranslateUi(mainWindow)
         QtCore.QMetaObject.connectSlotsByName(mainWindow)
 
     def retranslateUi(self, mainWindow):
+        # 2nd start generated code from updates
         _translate = QtCore.QCoreApplication.translate
         mainWindow.setWindowTitle(_translate("mainWindow", "controlboard"))
         self.data_module_label.setText(_translate("mainWindow", "data loader"))
         self.lfs_button.setText(_translate("mainWindow", "reload available files"))
         self.lf_button.setText(_translate("mainWindow", "load file"))
-        self.plotter_label.setText(_translate("mainWindow", "plotter"))
+        item = self.file_list_view.horizontalHeaderItem(0)
+        item.setText(_translate("mainWindow", "file"))
+        item = self.variable_list_view.horizontalHeaderItem(0)
+        item.setText(_translate("mainWindow", "variable"))
+        item = self.variable_list_view.horizontalHeaderItem(1)
+        item.setText(_translate("mainWindow", "x"))
+        item = self.variable_list_view.horizontalHeaderItem(2)
+        item.setText(_translate("mainWindow", "y"))
+        self.plot_button.setText(_translate("mainWindow", "plot"))
+        self.train_button.setText(_translate("mainWindow", "train"))
+        self.plotter_label.setText(_translate("mainWindow", "plot"))
         self.trainer_label.setText(_translate("mainWindow", "trainer"))
         self.toolBar.setWindowTitle(_translate("mainWindow", "toolBar"))
-
+        # 2nd end of generated code from updates
 
     def lfs_button_called(self):
         self.file_list_view.clear()
@@ -196,8 +285,43 @@ class Ui_mainWindow(object):
         self.data_overview.clear()
         self.data_overview.insertPlainText(str(df))
         self.dataframe = df
+        variables = list(df.columns)
+        self.variable_list_view.setRowCount(len(variables))
+        for i, variable in enumerate(variables):
+            item = QTableWidgetItem(variable)
+            checkboxx = QTableWidgetItem()
+            checkboxx.setFlags(Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsEnabled)
+            checkboxx.setCheckState(Qt.CheckState.Unchecked)
+            checkboxy = QTableWidgetItem()
+            checkboxy.setFlags(Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsEnabled)
+            checkboxy.setCheckState(Qt.CheckState.Unchecked)
+            self.variable_list_view.setItem(i, 0, item)
+            self.variable_list_view.setItem(i, 1, checkboxx)
+            self.variable_list_view.setItem(i, 2, checkboxy)
 
+    def plot_button_called(self):
+        # clear the canvas
+        self.figure.clear()
+        x = []
+        y = []
+        # get variables from variable_list_view
+        for row in range(self.variable_list_view.rowCount()):
+            # x is selected
+            if self.variable_list_view.item(row, 1).checkState() == Qt.CheckState.Checked:
+                print(self.variable_list_view.item(row, 0).data(0))
+                x.append(self.variable_list_view.item(row, 0).data(0))
 
+            # y is selected
+            if self.variable_list_view.item(row, 2).checkState() == Qt.CheckState.Checked:
+                print(self.variable_list_view.item(row, 0).data(0))
+                y.append(self.variable_list_view.item(row, 0).data(0))
+
+        # variables = list(self.dataframe.columns)
+        plt.plot(self.dataframe[x[0]], self.dataframe[y[0]], 'ro')
+        plt.xlabel(x[0])
+        plt.ylabel(y[0])
+        # refresh canvas
+        self.canvas.draw()
 
 import sys
 from PyQt6.QtWidgets import *

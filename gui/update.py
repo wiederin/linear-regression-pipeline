@@ -12,7 +12,9 @@ if __name__ == '__main__':
     update_file.close()
     # boolean and list to store part to be copied
     u_copy = False
+    u_copy2 = False
     code_from_update = []
+    code_from_update2 = []
     # loop through each line
     for u_line in u_lines:
         # end copying if this is seen
@@ -21,9 +23,13 @@ if __name__ == '__main__':
         # copy
         if u_copy:
             code_from_update.append(u_line)
+        if u_copy2:
+            code_from_update2.append(u_line)
         # start copying if this is seen
         if u_line.startswith("    def setupUi(self, mainWindow):"):
             u_copy = True
+        if u_line.startswith("    def retranslateUi(self, mainWindow):"):
+            u_copy2 = True
 
     # open controlboard_gui.py file & read
     gui_file = open('controlboard_gui.py')
@@ -37,12 +43,17 @@ if __name__ == '__main__':
         # start copying
         if g_line.startswith("        # end of generated code from updates"):
             g_copy = True
+        if g_line.startswith("        # 2nd end of generated code from updates"):
+            g_copy = True
         if g_copy:
             full_code.append(g_line)
         # stop copying
         if g_line.startswith("        # start generated code from updates"):
             g_copy = False
             full_code.append(code_from_update)
+        if g_line.startswith("        # 2nd start generated code from updates"):
+            g_copy = False
+            full_code.append(code_from_update2)
 
     # write full code to file
     gui_file = open('controlboard_gui.py', 'w')
