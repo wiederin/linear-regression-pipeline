@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1404</width>
-    <height>746</height>
+    <height>776</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -35,7 +35,7 @@
       <x>0</x>
       <y>0</y>
       <width>1401</width>
-      <height>301</height>
+      <height>336</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="data_module">
@@ -93,7 +93,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QFrame" name="verticalFrame_2">
+         <widget class="QFrame" name="fl_vf">
           <property name="maximumSize">
            <size>
             <width>340</width>
@@ -120,7 +120,7 @@
               <bool>true</bool>
              </property>
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+              <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -183,7 +183,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QFrame" name="verticalFrame_2">
+         <widget class="QFrame" name="v_b_vf">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -210,18 +210,35 @@
                <string>variable</string>
               </property>
              </column>
+             <column>
+              <property name="text">
+               <string>x</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>y</string>
+              </property>
+             </column>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="plot">
+            <widget class="QPushButton" name="plot_button">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
              <property name="text">
               <string>plot</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="train_button">
+             <property name="text">
+              <string>train</string>
              </property>
             </widget>
            </item>
@@ -244,23 +261,50 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>300</y>
+      <y>330</y>
       <width>591</width>
       <height>411</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="plotter_module">
      <item>
-      <widget class="QFrame" name="verticalFrame_2">
+      <widget class="QFrame" name="pl_vf">
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
          <widget class="QLabel" name="plotter_label">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>20</height>
+           </size>
+          </property>
           <property name="text">
            <string>plot</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignHCenter|Qt::AlignTop</set>
           </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="plot_frame">
+          <widget class="QWidget" name="horizontalLayoutWidget_3">
+           <property name="geometry">
+            <rect>
+             <x>9</x>
+             <y>-1</y>
+             <width>571</width>
+             <height>371</height>
+            </rect>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout"/>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -271,8 +315,8 @@
    <widget class="QWidget" name="horizontalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>300</y>
+      <x>600</x>
+      <y>330</y>
       <width>811</width>
       <height>411</height>
      </rect>
@@ -286,13 +330,19 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="trainer_label">
-       <property name="text">
-        <string>trainer</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignHCenter|Qt::AlignTop</set>
-       </property>
+      <widget class="QFrame" name="tr_vf">
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QLabel" name="trainer_label">
+          <property name="text">
+           <string>trainer</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignHCenter|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
     </layout>
